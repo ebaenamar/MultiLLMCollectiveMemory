@@ -1,0 +1,44 @@
+experiment_id: "traffic_control_basic_comparison"
+task_description: |
+  Design an intelligent traffic control system using sensors, edge computing, and AI-based prediction for a medium-sized city. Provide:
+  1. Overall system architecture and component integration
+  2. Sensor hardware specifications and deployment strategy  
+  3. Machine learning algorithms and model architecture
+  4. Implementation phases and timeline
+  5. Success metrics and evaluation framework
+
+  The system should handle 200+ intersections, support real-time decision making (<100ms), and achieve 20-30% reduction in travel times.
+
+configurations:
+  - "single_agent_baseline"
+  - "multi_agent_no_memory"
+  - "multi_agent_shared_memory"
+  - "multi_agent_private_memory"
+
+iterations: 3
+timeout_minutes: 30
+output_dir: "./results"
+
+# Evaluation criteria
+evaluation_criteria:
+  - solution_completeness
+  - technical_accuracy
+  - integration_coherence
+  - innovation_score
+  - implementation_feasibility
+
+# Expected outcomes for hypothesis testing
+expected_outcomes:
+  single_agent_baseline:
+    quality_score: 6.5
+    token_efficiency: 1.0
+  multi_agent_no_memory:
+    quality_score: 7.2
+    token_efficiency: 1.2
+  multi_agent_shared_memory:
+    quality_score: 8.4
+    token_efficiency: 0.75
+    redundancy_reduction: 25
+  multi_agent_private_memory:
+    quality_score: 7.8
+    token_efficiency: 0.85

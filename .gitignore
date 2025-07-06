@@ -1,0 +1,84 @@
+# Environment and API Keys
+.env
+*.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Experimental Results
+results/
+memory_data/
+logs/
+analysis_output/
+exports/
+temp/
+
+# Docker
+.dockerignore
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ChromaDB
+chroma_db/
+*.db
+*.sqlite
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Large model files
+*.model
+*.pkl
+*.pickle
+
+# API response caches
+cache/
+.cache/
