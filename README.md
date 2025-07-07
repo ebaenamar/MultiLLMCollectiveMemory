@@ -1,65 +1,65 @@
 # Multi-LLM Collective Memory Research Framework
 
-## 🧠 Exploración de la Emergencia de Memoria Colectiva Distribuida en Sistemas Multi-LLM
+## 🧠 Exploring the Emergence of Distributed Collective Memory in Multi-LLM Systems
 
-Este repositorio contiene el framework experimental para investigar el impacto de la memoria colaborativa persistente entre múltiples agentes LLM en tareas complejas de razonamiento multietapa.
+This repository contains the experimental framework for investigating the impact of persistent collaborative memory between multiple LLM agents on complex multi-stage reasoning tasks.
 
-### 📌 Hipótesis Principal
+### 📌 Main Hypothesis
 
-La memoria colaborativa persistente entre múltiples agentes LLM puede mejorar significativamente la eficiencia y precisión de tareas complejas de razonamiento multietapa bajo restricciones de contexto, en comparación con memorias aisladas o ausencia de memoria.
+Persistent collaborative memory between multiple LLM agents can significantly improve the efficiency and accuracy of complex multi-stage reasoning tasks under context constraints, compared to isolated memories or absence of memory.
 
-### 🏗️ Estructura del Proyecto
+### 🏗️ Project Structure
 
 ```
-├── paper/                    # Paper de investigación y documentación
-├── experiments/             # Configuraciones experimentales
-├── agents/                  # Implementación de agentes especializados
-├── memory_systems/          # Sistemas de memoria (compartida, privada, sin memoria)
-├── benchmarks/             # Tareas de evaluación y métricas
-├── evaluation/             # Scripts de evaluación y análisis
-├── results/                # Resultados experimentales y visualizaciones
-└── docker/                 # Configuración de contenedores
+├── paper/                    # Research paper and documentation
+├── experiments/             # Experimental configurations
+├── agents/                  # Specialized agent implementations
+├── memory_systems/          # Memory systems (shared, private, no memory)
+├── benchmarks/             # Evaluation tasks and metrics
+├── evaluation/             # Evaluation and analysis scripts
+├── results/                # Experimental results and visualizations
+└── docker/                 # Container configuration
 ```
 
-### 🚀 Inicio Rápido
+### 🚀 Quick Start
 
-1. **Configurar entorno:**
+1. **Set up environment:**
    ```bash
    docker-compose up -d
    ```
 
-2. **Ejecutar experimento básico:**
+2. **Run basic experiment:**
    ```bash
    python experiments/run_benchmark.py --config configs/basic_comparison.yaml
    ```
 
-3. **Analizar resultados:**
+3. **Analyze results:**
    ```bash
    python evaluation/analyze_results.py --experiment_id latest
    ```
 
-### 📊 Configuraciones Experimentales
+### 📊 Experimental Configurations
 
-- **Single Agent**: GPT-4 solo, sin memoria externa (baseline)
-- **Multi-Agente sin memoria**: Múltiples LLMs con solo historial de diálogo
-- **Multi-Agente con memoria compartida**: Memoria común persistente JSON/vector DB
-- **Multi-Agente con memoria privada**: Cada agente con memoria individual aislada
+- **Single Agent**: GPT-4 alone, no external memory (baseline)
+- **Multi-Agent without memory**: Multiple LLMs with dialogue history only
+- **Multi-Agent with shared memory**: Persistent common memory JSON/vector DB
+- **Multi-Agent with private memory**: Each agent with isolated individual memory
 
-### 🎯 Métricas de Evaluación
+### 🎯 Evaluation Metrics
 
-- Accuracy del resultado final
-- Número de tokens totales utilizados
-- Redundancia computacional evitada
-- Tasa de reutilización de conocimientos
-- Utilización de memoria (lecturas/escrituras)
-- Calidad incremental del output
+- Final result accuracy
+- Total number of tokens used
+- Computational redundancy avoided
+- Knowledge reuse rate
+- Memory utilization (reads/writes)
+- Incremental output quality
 
-### 📝 Contribuciones
+### 📝 Contributions
 
-Este trabajo busca llenar el vacío en benchmarks estándar que cuantifiquen la contribución específica de la memoria distribuida compartida en tareas cognitivas multi-LLM.
+This work seeks to fill the gap in standard benchmarks that quantify the specific contribution of shared distributed memory in multi-LLM cognitive tasks.
 
 ---
 
-**Autor**: [Tu nombre]  
-**Institución**: [Tu institución]  
-**Contacto**: [Tu email]
+**Author**: Eduardo Baena w Claude 4
+**Institution**: Sundai Club
+**Contact**: e.baena@northeastern.edu
