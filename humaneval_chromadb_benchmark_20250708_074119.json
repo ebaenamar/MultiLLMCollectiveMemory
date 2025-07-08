@@ -1,0 +1,656 @@
+{
+  "benchmark_info": {
+    "timestamp": "2025-07-08T07:41:19.905599",
+    "approaches_tested": 3,
+    "problems_per_approach": 10
+  },
+  "results": [
+    {
+      "approach": "single_agent",
+      "results": [
+        {
+          "task_id": "HumanEval/0",
+          "solution": "Here is the Python code solution:\n\n```python\nfrom typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\"\n    Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n\n    The function sorts the list of numbers and then checks the difference between each pair of adjacent numbers.\n    If the difference is less than the threshold, it returns True. If no such pair is found after checking all pairs,\n    it returns False.\n\n    Args:\n        numbers: A list of floating point numbers.\n        threshold: A floating point number.\n\n    Returns:\n        A boolean value. True if there are any two numbers in the list that are closer to each other than the threshold,\n        False otherwise.\n\n    Raises:\n        ValueError: If the threshold is negative.\n    \"\"\"\n\n    # Check if the threshold is negative\n    if threshold < 0:\n        raise ValueError(\"Threshold must be non-negative\")\n\n    # Sort the list of numbers\n    numbers.sort()\n\n    # Check the difference between each pair of adjacent numbers\n    for i in range(len(numbers) - 1):\n        if numbers[i + 1] - numbers[i] < threshold:\n            return True\n\n    # If no pair of numbers is closer than the threshold, return False\n    return False\n```\n\nThis function first checks if the threshold is negative, and raises a ValueError if it is. It then sorts the list of numbers, which takes O(n log n) time. After that, it checks the difference between each pair of adjacent numbers in the sorted list, which takes O(n) time. If it finds a pair of numbers that are closer to each other than the threshold, it immediately returns True. If it checks all pairs of numbers and doesn't find any that are closer than the threshold, it returns False. Therefore, the overall time complexity of this function is O(n log n).",
+          "execution_time": 14.700032949447632,
+          "cost": 0.02967,
+          "tokens": 593,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/1",
+          "solution": "Here is the Python code solution:\n\n```python\nfrom typing import List\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    # Remove spaces from the input string\n    paren_string = paren_string.replace(' ', '')\n\n    # Initialize an empty list to store the separate groups\n    separate_groups = []\n\n    # Initialize an empty string to store the current group\n    current_group = ''\n\n    # Initialize a counter to keep track of the balance of parentheses\n    balance = 0\n\n    # Iterate over each character in the input string\n    for char in paren_string:\n        # If the character is an open parenthesis, increment the balance counter\n        if char == '(':\n            balance += 1\n        # If the character is a close parenthesis, decrement the balance counter\n        elif char == ')':\n            balance -= 1\n        # If the balance counter is negative, raise an error\n        if balance < 0:\n            raise ValueError('Input string contains unbalanced parentheses')\n        # Add the character to the current group\n        current_group += char\n        # If the balance counter is zero, add the current group to the list of separate groups and reset the current group\n        if balance == 0:\n            separate_groups.append(current_group)\n            current_group = ''\n\n    # If the balance counter is not zero at the end, raise an error\n    if balance != 0:\n        raise ValueError('Input string contains unbalanced parentheses')\n\n    # Return the list of separate groups\n    return separate_groups\n```\n\nThis function works by maintaining a balance counter that is incremented for each open parenthesis and decremented for each close parenthesis. When the balance counter is zero, it means that a group of parentheses has been completely processed, so it is added to the list of separate groups. If the balance counter is negative or not zero at the end, it means that the parentheses are unbalanced, so an error is raised. The time complexity of this function is O(n), where n is the length of the input string, because it processes each character once. The space complexity is also O(n), because it stores the input string and the list of separate groups.",
+          "execution_time": 15.678409814834595,
+          "cost": 0.032339999999999994,
+          "tokens": 633,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/2",
+          "solution": "Here is the Python code solution:\n\n```python\ndef truncate_number(number: float) -> float:\n    \"\"\"\n    Given a positive floating point number, this function returns the decimal part of the number.\n    \"\"\"\n    # Error handling: Check if the input is a positive float number\n    if not isinstance(number, float) or number < 0:\n        raise ValueError(\"Input must be a positive float number\")\n\n    # The logic here is to subtract the integer part of the number from the number itself\n    # The integer part can be obtained by using the built-in int() function\n    # The result will be the decimal part of the number\n    decimal_part = number - int(number)\n\n    return decimal_part\n```\n\nThis solution is efficient because it only involves a subtraction operation, which is a constant time operation O(1). It also follows best practices such as input validation and clear comments explaining the logic.",
+          "execution_time": 7.853302955627441,
+          "cost": 0.0159,
+          "tokens": 344,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/3",
+          "solution": "Here is the Python code solution:\n\n```python\nfrom typing import List\n\ndef below_zero(operations: List[int]) -> bool:\n    \"\"\"\n    This function takes a list of integers as input, which represent deposit and withdrawal operations on a bank account.\n    It returns True if at any point the balance of account falls below zero, otherwise it returns False.\n    \"\"\"\n\n    # Initialize balance to 0\n    balance = 0\n\n    # Iterate over each operation in the list\n    for operation in operations:\n        # Add the operation to the balance\n        balance += operation\n\n        # If balance falls below zero, return True\n        if balance < 0:\n            return True\n\n    # If balance never falls below zero, return False\n    return False\n```\n\nThis function works by maintaining a running total of the balance, adding each operation to the balance in turn. If at any point the balance falls below zero, the function immediately returns True. If the function completes the loop without the balance ever falling below zero, it returns False.\n\nThis function assumes that the input is a list of integers. If the input is not a list, or contains non-integer values, the function will raise a TypeError. This is appropriate error handling for this function, as the input should always be a list of integers according to the problem statement.\n\nThis function is efficient, as it only needs to iterate over the list of operations once, and it will return as soon as it detects a negative balance. This is an example of a best practice known as \"early return\", which can improve the performance of a function by avoiding unnecessary computation.",
+          "execution_time": 16.519625902175903,
+          "cost": 0.025560000000000003,
+          "tokens": 522,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/4",
+          "solution": "Here is the Python code solution:\n\n```python\nfrom typing import List\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    \"\"\"\n    # Check if the input list is empty\n    if not numbers:\n        raise ValueError(\"Input list is empty\")\n\n    # Calculate the mean of the numbers\n    mean = sum(numbers) / len(numbers)\n\n    # Calculate the absolute differences between each number and the mean\n    absolute_differences = [abs(x - mean) for x in numbers]\n\n    # Calculate the mean of these absolute differences\n    mad = sum(absolute_differences) / len(absolute_differences)\n\n    return mad\n```\n\nThis function first checks if the input list is empty. If it is, it raises a ValueError. Then it calculates the mean of the numbers in the list. After that, it calculates the absolute differences between each number and the mean. Finally, it calculates the mean of these absolute differences, which is the Mean Absolute Deviation (MAD). The function returns this value.",
+          "execution_time": 14.247437000274658,
+          "cost": 0.021779999999999997,
+          "tokens": 458,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/5",
+          "solution": "Here is the Python code solution:\n\n```python\nfrom typing import List\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    \"\"\"\n    This function inserts a number 'delimeter' between every two consecutive elements of input list `numbers'.\n    It first checks if the input list is empty. If it is, it returns an empty list.\n    Then it creates a new list where it adds each number from the input list followed by the delimeter.\n    Finally, it removes the last delimeter from the list and returns the result.\n    \"\"\"\n    # Check if the input list is empty\n    if not numbers:\n        return []\n\n    # Initialize an empty list to store the result\n    result = []\n\n    # Iterate over the input list\n    for num in numbers:\n        # Add the current number to the result list\n        result.append(num)\n        # Add the delimeter to the result list\n        result.append(delimeter)\n\n    # Remove the last delimeter from the result list\n    result.pop()\n\n    # Return the result list\n    return result\n```\n\nThis solution is efficient because it only iterates over the input list once, so its time complexity is O(n), where n is the length of the input list. It also follows best practices by using clear variable names, including a docstring to explain the function's purpose, and handling the edge case where the input list is empty.",
+          "execution_time": 13.57596230506897,
+          "cost": 0.022529999999999998,
+          "tokens": 458,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/6",
+          "solution": "Here is the Python code solution:\n\n```python\nfrom typing import List\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    # Initialize the list to store the maximum depth of each group\n    max_depths = []\n    \n    # Split the input string into groups by spaces\n    groups = paren_string.split()\n    \n    # Iterate over each group\n    for group in groups:\n        # Initialize the current depth and maximum depth\n        curr_depth = max_depth = 0\n        \n        # Iterate over each character in the group\n        for char in group:\n            # If the character is an opening parenthesis, increment the current depth\n            if char == '(':\n                curr_depth += 1\n                # If the current depth is greater than the maximum depth, update the maximum depth\n                if curr_depth > max_depth:\n                    max_depth = curr_depth\n            # If the character is a closing parenthesis, decrement the current depth\n            elif char == ')':\n                curr_depth -= 1\n            # If the character is not a parenthesis, raise a ValueError\n            else:\n                raise ValueError(\"Invalid character in group: \" + char)\n        \n        # If the current depth is not zero after iterating over the group, raise a ValueError\n        if curr_depth != 0:\n            raise ValueError(\"Unbalanced parentheses in group: \" + group)\n        \n        # Append the maximum depth of the group to the list\n        max_depths.append(max_depth)\n    \n    # Return the list of maximum depths\n    return max_depths\n```\n\nThis function works by splitting the input string into groups by spaces, then iterating over each group and each character in the group. It maintains a current depth and a maximum depth, incrementing the current depth when it encounters an opening parenthesis and decrementing it when it encounters a closing parenthesis. If it encounters any character other than a parenthesis, it raises a ValueError. After iterating over a group, if the current depth is not zero, it raises a ValueError, indicating unbalanced parentheses. Finally, it appends the maximum depth of the group to the list of maximum depths and returns this list.",
+          "execution_time": 20.509793043136597,
+          "cost": 0.03183,
+          "tokens": 623,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/7",
+          "solution": "Here is the Python code solution:\n\n```python\nfrom typing import List\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\"\n    This function filters an input list of strings and returns only those that contain a given substring.\n    It uses Python's built-in 'filter' function, which applies a function to each element in a list and returns only those for which the function returns True.\n    In this case, the function is a lambda function that checks if the substring is in the string.\n    The result of the filter function is a filter object, which is then converted to a list before being returned.\n    \"\"\"\n    # Error handling: check if inputs are of correct type\n    if not isinstance(strings, list) or not all(isinstance(s, str) for s in strings) or not isinstance(substring, str):\n        raise TypeError(\"Input types are not correct. 'strings' should be a list of strings and 'substring' should be a string.\")\n    \n    # Use filter function to filter strings that contain the substring\n    filtered_strings = filter(lambda s: substring in s, strings)\n    \n    # Convert filter object to list and return\n    return list(filtered_strings)\n```\n\nThis solution is efficient as it uses Python's built-in functions to perform the filtering operation. It also follows best practices by including error handling and clear comments explaining the logic.",
+          "execution_time": 12.451565980911255,
+          "cost": 0.022019999999999998,
+          "tokens": 450,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/8",
+          "solution": "Here is the Python code solution:\n\n```python\nfrom typing import List, Tuple\nfrom functools import reduce\nimport operator\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\"\n    For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    \"\"\"\n    # Error handling: Check if the input is a list\n    if not isinstance(numbers, list):\n        raise TypeError(\"Input should be a list of integers.\")\n    \n    # Error handling: Check if all elements in the list are integers\n    for num in numbers:\n        if not isinstance(num, int):\n            raise TypeError(\"All elements in the list should be integers.\")\n    \n    # Calculate the sum of the numbers\n    total_sum = sum(numbers)\n    \n    # Calculate the product of the numbers\n    # If the list is empty, the product should be 1\n    total_product = reduce(operator.mul, numbers, 1)\n    \n    return total_sum, total_product\n```\n\nThis function first checks if the input is a list and if all elements in the list are integers. If not, it raises a TypeError. Then it calculates the sum of the numbers using the built-in `sum` function. For the product, it uses the `reduce` function from the `functools` module and the `mul` function from the `operator` module. The `reduce` function applies a binary function (in this case `mul`) to all items in an iterable (in this case `numbers`) in a cumulative way. If the iterable is empty, `reduce` returns the third argument (in this case `1`). Finally, the function returns a tuple with the sum and the product.",
+          "execution_time": 12.948547840118408,
+          "cost": 0.02799,
+          "tokens": 558,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/9",
+          "solution": "Here is the Python code solution:\n\n```python\nfrom typing import List\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\"\n    From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    \"\"\"\n    # Check if the input is a list\n    if not isinstance(numbers, list):\n        raise TypeError(\"Input should be a list of integers\")\n\n    # Check if the list is not empty\n    if not numbers:\n        raise ValueError(\"Input list should not be empty\")\n\n    # Initialize the list to store the rolling maximums\n    rolling_maxes = []\n\n    # Initialize the current maximum\n    current_max = numbers[0]\n\n    # Iterate over the numbers in the list\n    for number in numbers:\n        # Check if the current number is greater than the current maximum\n        if number > current_max:\n            # If it is, update the current maximum\n            current_max = number\n\n        # Append the current maximum to the list of rolling maximums\n        rolling_maxes.append(current_max)\n\n    # Return the list of rolling maximums\n    return rolling_maxes\n```\n\nThis function works by iterating over the input list and keeping track of the maximum number seen so far. For each number, it checks if it's greater than the current maximum. If it is, it updates the current maximum. Then it appends the current maximum to the list of rolling maximums. The function also includes error handling to check if the input is a list and if the list is not empty.",
+          "execution_time": 11.131828784942627,
+          "cost": 0.024449999999999996,
+          "tokens": 494,
+          "success": true
+        }
+      ],
+      "summary": {
+        "total_problems": 10,
+        "successful": 10,
+        "total_cost": 0.25406999999999996,
+        "total_time": 139.6165065765381,
+        "avg_cost": 0.025406999999999996,
+        "avg_time": 13.96165065765381
+      }
+    },
+    {
+      "approach": "multi_agent_no_memory",
+      "results": [
+        {
+          "task_id": "HumanEval/0",
+          "solution": "1. Correctness and logic: The logic of the code is correct. It correctly checks for pairs of numbers in the list that are closer to each other than the threshold.\n\n2. Edge case handling: The code correctly handles edge cases such as an empty list, a list with only one element, and a negative threshold.\n\n3. Code quality and efficiency: The code is well-written and easy to understand. However, the efficiency could be improved. The current time complexity is O(n^2), which could be too slow for large lists.\n\n4. Potential improvements: The code could be optimized by sorting the list first, then iterating over it only once. For each number, we can use binary search to find the closest number to it, and check if the difference is less than the threshold. This would reduce the time complexity to O(n log n).\n\nHere is the improved code:\n\n```python\nfrom typing import List\nimport bisect\n\ndef check_threshold(numbers: List[float], threshold: float) -> bool:\n    \"\"\"\n    This function checks if there are any two numbers in the list that are closer to each other than the threshold.\n\n    :param numbers: A list of floating point numbers\n    :param threshold: A floating point number as threshold\n    :return: True if there are any two numbers in the list that are closer to each other than the threshold, otherwise False\n    \"\"\"\n    # Check if the list is empty or contains only one element\n    if len(numbers) < 2:\n        return False\n\n    # Check if the threshold is negative\n    if threshold < 0:\n        return False\n\n    # Sort the list\n    numbers.sort()\n\n    # Iterate over the list\n    for i in range(len(numbers) - 1):\n        # Use binary search to find the closest number to the current number\n        j = bisect.bisect_left(numbers, numbers[i] + threshold, i + 1)\n\n        # If the closest number is closer than the threshold, return True\n        if j < len(numbers) and numbers[j] - numbers[i] < threshold:\n            return True\n\n    # If no such pair is found after checking all pairs, return False\n    return False\n```\nThis improved code first sorts the list, then iterates over it only once. For each number, it uses binary search to find the closest number to it, and checks if the difference is less than the threshold. If such a pair is found, it returns True. If no such pair is found after checking all pairs, it returns False.",
+          "execution_time": 63.746148109436035,
+          "cost": 0.21356999999999998,
+          "tokens": 2373,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/1",
+          "solution": "1. Correctness and logic:\nThe logic of the code seems to be incorrect. The code is trying to pop from the stack until it finds an open parenthesis '(' when it encounters a close parenthesis ')'. However, according to the problem statement, the parentheses groups are balanced and not nested within each other. This means that for every open parenthesis, there should be a corresponding close parenthesis following it before another open parenthesis appears. Therefore, the while loop is unnecessary and could lead to errors if the stack is empty.\n\n2. Edge case handling:\nThe code does not handle the edge cases where the input string is empty or contains only spaces. It also does not handle the case where the parentheses are unbalanced, which could lead to errors when trying to pop from an empty stack.\n\n3. Code quality and efficiency:\nThe code is well-structured and includes comments to explain each step, which is good for readability. However, the efficiency could be improved. The while loop is unnecessary and could lead to a time complexity of O(n^2) in the worst case, where n is the length of the input string.\n\n4. Potential improvements:\nThe code could be improved by removing the while loop and handling the edge cases mentioned above. Here is the corrected code:\n\n```python\ndef separate_parentheses(input_string):\n    # Initialize an empty stack and an empty list\n    stack = []\n    groups = []\n    \n    # Handle the edge case where the input string is empty or contains only spaces\n    if not input_string.strip():\n        return groups\n    \n    # Iterate over the characters in the input string\n    for char in input_string:\n        # Ignore spaces\n        if char == ' ':\n            continue\n        # If the character is an open parenthesis, push it onto the stack\n        elif char == '(':\n            stack.append(char)\n        # If the character is a close parenthesis\n        elif char == ')':\n            # Check if the stack is empty or the top of the stack is not an open parenthesis\n            if not stack or stack[-1] != '(':\n                raise ValueError('Unbalanced parentheses in input string')\n            # Pop the open parenthesis from the stack and form a group\n            group = stack.pop() + char\n            # Append the group to the list of groups\n            groups.append(group)\n        # If the character is not a parenthesis or a space, raise an error\n        else:\n            raise ValueError('Invalid character in input string')\n    \n    # Check if there are unbalanced parentheses left in the stack\n    if stack:\n        raise ValueError('Unbalanced parentheses in input string')\n    \n    # Return the list of separate groups of parentheses\n    return groups\n```\nThis corrected code handles the edge cases and has a time complexity of O(n), where n is the length of the input string. It also checks for unbalanced parentheses in the input string and raises an error if found.",
+          "execution_time": 48.36466312408447,
+          "cost": 0.23418,
+          "tokens": 2602,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/2",
+          "solution": "1. Correctness and logic: The logic of the code is correct. It correctly calculates the decimal part of a floating point number by subtracting the integer part from the original number.\n\n2. Edge case handling: The code handles edge cases well. It checks if the input is a positive floating point number and raises a ValueError if it's not. This takes care of negative numbers, integers, and non-numeric inputs. However, it does not handle the case where the input is zero. Zero is technically a positive number, so the function should return 0.0 in this case.\n\n3. Code quality and efficiency: The code is well-written and follows Python best practices. It includes clear comments, proper error handling, and efficient use of built-in functions. The time and space complexity of the function is O(1), which is the best we can achieve for this problem.\n\n4. Potential improvements: As mentioned above, the function should handle the case where the input is zero. Here is the corrected code:\n\n```python\ndef get_decimal_part(number):\n    \"\"\"\n    This function takes a positive floating point number as input and returns its decimal part.\n    \n    :param number: A positive floating point number\n    :type number: float\n    :return: The decimal part of the input number\n    :rtype: float\n    \"\"\"\n    \n    # Error handling: Check if the input is a positive floating point number\n    if not isinstance(number, float) or number < 0:\n        raise ValueError(\"Input must be a positive floating point number\")\n    \n    # Handle the case where the input is zero\n    if number == 0:\n        return 0.0\n    \n    # Step 1: Take the input number\n    # This is done by the function argument\n    \n    # Step 2: Find the integer part of the number\n    integer_part = int(number)\n    \n    # Step 3: Subtract the integer part from the original number to get the decimal part\n    decimal_part = number - integer_part\n    \n    # Step 4: Return the decimal part\n    return decimal_part\n```\n\nThis function now correctly handles all edge cases and follows Python best practices.",
+          "execution_time": 55.90659475326538,
+          "cost": 0.18081,
+          "tokens": 2009,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/3",
+          "solution": "1. Correctness and Logic:\n   The logic of the code is correct. It correctly checks if the balance of a bank account falls below zero at any point by iterating over the list of operations and updating the balance accordingly.\n\n2. Edge Case Handling:\n   The code handles edge cases correctly. If the list is empty, the function will return False, which is the expected behavior. If the first operation in the list is a withdrawal that is greater than zero, the function will return True, which is also the expected behavior.\n\n3. Code Quality and Efficiency:\n   The code is clean, well-structured, and efficient. It uses a simple iterative approach to solve the problem, which results in a time complexity of O(n) and a space complexity of O(1).\n\n4. Potential Improvements:\n   There are no potential improvements to be made in terms of functionality. The code meets all the requirements and handles all edge cases. However, for code quality, it would be better to add type hints to the function signature for better readability and understanding of the code.\n\nCorrected Code:\n```python\nfrom typing import List\n\ndef check_balance(operations: List[int]) -> bool:\n    \"\"\"\n    This function checks if the balance of a bank account falls below zero at any point.\n    \n    Parameters:\n    operations (List[int]): A list of integers representing deposit and withdrawal operations.\n\n    Returns:\n    bool: True if the balance falls below zero at any point, False otherwise.\n    \"\"\"\n    # Initialize balance to 0\n    balance = 0\n\n    # Iterate over the list of operations\n    for operation in operations:\n        # Add the operation to the balance\n        balance += operation\n\n        # If balance is less than 0, return True\n        if balance < 0:\n            return True\n\n    # If we finish iterating over the list without returning, return False\n    return False\n```\nThis function now includes type hints in the function signature, which improves code readability and understanding.",
+          "execution_time": 50.708497047424316,
+          "cost": 0.19107,
+          "tokens": 2123,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/4",
+          "solution": "Here is the Python code implementation based on the provided architecture:\n\n```python\ndef calculate_mad(numbers):\n    \"\"\"\n    This function calculates the Mean Absolute Deviation (MAD) of a list of floating point numbers.\n    :param numbers: List of floating point numbers\n    :return: Mean Absolute Deviation (MAD) as a floating point number\n    \"\"\"\n    # Check if the list is empty\n    if not numbers:\n        raise ValueError(\"The input list is empty\")\n\n    # Calculate the mean of the list\n    mean = sum(numbers) / len(numbers)\n\n    # Calculate the absolute deviation of each number from the mean\n    absolute_deviations = [abs(number - mean) for number in numbers]\n\n    # Calculate the mean of the absolute deviations\n    mad = sum(absolute_deviations) / len(numbers)\n\n    return mad\n```\n\nThis function first checks if the input list is empty and raises a ValueError if it is. It then calculates the mean of the list and the absolute deviation of each number from the mean. Finally, it calculates the mean of these absolute deviations and returns it. The function uses list comprehension to calculate the absolute deviations, which makes the code more concise and readable. The function handles errors by raising a ValueError when the input list is empty. This is a common way to handle errors in Python and allows the caller of the function to handle the error in a way that is appropriate for their use case.",
+          "execution_time": 47.71973490715027,
+          "cost": 0.17955,
+          "tokens": 1995,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/5",
+          "solution": "1. Correctness and logic: The logic of the code is correct. It correctly inserts the delimiter between every two consecutive elements of the input list.\n\n2. Edge case handling: The code handles edge cases correctly. It returns an empty list if the input list is empty. If the input list contains only one element, it returns the list as is, without the delimiter. If the delimiter is 0, it still inserts it between every two consecutive elements.\n\n3. Code quality and efficiency: The code is clean, well-structured, and efficient. It has a time complexity of O(n) and a space complexity of O(n), where n is the length of the input list.\n\n4. Potential improvements: The code is already efficient, but it can be made more Pythonic by using list comprehension. Here's the improved code:\n\n```python\ndef insert_delimeter(numbers, delimeter):\n    \"\"\"\n    This function inserts a given delimeter between every two consecutive elements of a list.\n\n    :param numbers: list of integers\n    :param delimeter: integer\n    :return: list of integers with the delimeter inserted between every two consecutive elements\n    \"\"\"\n    # Use list comprehension to create the result list\n    result = [num for num in numbers for _ in (0, 1) if _ == 0 or num != numbers[-1]]\n\n    # If the input list is not empty, remove the last element of the result list\n    if numbers:\n        result.pop()\n\n    # Return the result list\n    return result\n```\n\nIn this improved code, the list comprehension creates a list where each element of the input list is followed by the delimiter. If the element is not the last one in the input list, the delimiter is added. If the input list is not empty, the last element of the result list (which is an extra delimiter) is removed. This code still has a time complexity of O(n) and a space complexity of O(n), but it's more concise.",
+          "execution_time": 56.02797317504883,
+          "cost": 0.17298,
+          "tokens": 1922,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/6",
+          "solution": "1. Correctness and logic: The logic of the code is correct. It correctly uses a stack to track the depth of parentheses and raises an error when it encounters unbalanced parentheses.\n\n2. Edge case handling: The code handles edge cases well. It correctly handles the case of an empty string by returning an empty list. It also correctly handles the case of unbalanced parentheses by raising a ValueError.\n\n3. Code quality and efficiency: The code is well-written and efficient. It has a time complexity of O(n) and a space complexity of O(m), where n is the length of the input string and m is the maximum depth of nesting in any group of parentheses.\n\n4. Potential improvements: The code is already quite good, but there is one potential improvement. Instead of using a stack to track the depth of parentheses, we can use a simple counter. This will reduce the space complexity from O(m) to O(1). Here is the improved code:\n\n```python\ndef find_max_depth(s):\n    # Split the input string into groups\n    groups = s.split()\n\n    # Initialize the result list\n    result = []\n\n    # Process each group\n    for group in groups:\n        # Initialize the counter and max_depth\n        counter = 0\n        max_depth = 0\n\n        # Process each character in the group\n        for char in group:\n            if char == '(':\n                # Increment the counter and update max_depth\n                counter += 1\n                max_depth = max(max_depth, counter)\n            elif char == ')':\n                # Decrement the counter\n                if counter == 0:\n                    # The parentheses are unbalanced\n                    raise ValueError(\"Unbalanced parentheses\")\n                counter -= 1\n\n        # After processing all characters in the group\n        if counter != 0:\n            # The parentheses are unbalanced\n            raise ValueError(\"Unbalanced parentheses\")\n\n        # Add max_depth to the result list\n        result.append(max_depth)\n\n    # Return the result list\n    return result\n```\n\nThis improved function has the same functionality as the original one, but with a lower space complexity.",
+          "execution_time": 59.87060880661011,
+          "cost": 0.23013,
+          "tokens": 2557,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/7",
+          "solution": "1. Correctness and Logic:\n   The implementation appears to be correct. The logic of the function is sound, and it should correctly filter the list of strings based on the presence of the substring.\n\n2. Edge Case Handling:\n   The function handles edge cases well. It checks the types of the input parameters and raises a TypeError if they are not correct. This will catch cases where the input list is not a list of strings or the substring is not a string. However, it does not explicitly handle the case where the substring is an empty string. In Python, the 'in' operator returns True when checking if an empty string is in another string, so the function will return the original list in this case, which is the expected behavior.\n\n3. Code Quality and Efficiency:\n   The code is well-written and easy to understand. It uses Python's built-in 'in' operator to check if the substring is in each string, which is efficient. The time complexity of the function is O(n*m), where n is the number of strings in the list and m is the average length of the strings. The space complexity is O(n), where n is the number of strings in the list.\n\n4. Potential Improvements:\n   The function could be made more concise by using a list comprehension instead of a for loop to create the result list. This would not change the time or space complexity of the function, but it would make the code shorter and more Pythonic.\n\nHere is the improved code:\n\n```python\ndef filter_strings(strings, substring):\n    \"\"\"\n    This function filters an input list of strings and returns only those strings that contain a given substring.\n\n    :param strings: List of strings\n    :param substring: Substring to be found in the strings\n    :return: List of strings containing the substring\n    \"\"\"\n\n    # Check if the input parameters are of the correct type\n    if not isinstance(strings, list) or not all(isinstance(s, str) for s in strings) or not isinstance(substring, str):\n        raise TypeError(\"Input parameters are not of the correct type\")\n\n    # Use a list comprehension to create the result list\n    return [string for string in strings if substring in string]\n```\n\nThis version of the function does exactly the same thing as the original, but it uses a list comprehension to create the result list, making the code more concise.",
+          "execution_time": 60.40227007865906,
+          "cost": 0.21195,
+          "tokens": 2355,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/8",
+          "solution": "1. Correctness and logic: The logic of the code is correct. It correctly calculates the sum and product of the integers in the list and returns them as a tuple.\n\n2. Edge case handling: The code handles edge cases well. It checks if the input is a list and if all elements in the list are integers, raising a TypeError if these conditions are not met. It correctly handles an empty list by initializing the sum to 0 and the product to 1. It also correctly handles a list with one element, a list with negative numbers, and a list with zero.\n\n3. Code quality and efficiency: The code is well-written and efficient. It has a time complexity of O(n) and a space complexity of O(1), which is the best we can do for this problem. The code is also easy to read and understand, with clear comments explaining what each part of the code does.\n\n4. Potential improvements: One potential improvement is to use the built-in Python functions sum() and prod() to calculate the sum and product. This would make the code shorter and more Pythonic. However, this would not improve the time or space complexity of the code. Here is the improved code:\n\n```python\nfrom math import prod\n\ndef sum_and_product(lst):\n    \"\"\"\n    This function takes a list of integers as input and returns a tuple consisting of the sum and the product of all the integers in the list.\n    If the list is empty, the sum is 0 and the product is 1.\n\n    :param lst: List of integers\n    :return: Tuple (sum, product)\n    \"\"\"\n\n    # Check if the input is a list\n    if not isinstance(lst, list):\n        raise TypeError(\"Input should be a list\")\n\n    # Check if all elements in the list are integers\n    for i in lst:\n        if not isinstance(i, int):\n            raise TypeError(\"All elements in the list should be integers\")\n\n    # Calculate sum and product using built-in Python functions\n    sum = sum(lst)\n    product = prod(lst)\n\n    # Return the sum and product as a tuple\n    return sum, product\n```\n\nNote: The prod() function is available in Python 3.8 and later. If you are using an earlier version of Python, you will need to calculate the product manually as in the original code.",
+          "execution_time": 57.58706879615784,
+          "cost": 0.19403999999999996,
+          "tokens": 2156,
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/9",
+          "solution": "1. Correctness and Logic:\n   The logic of the code is correct. It correctly implements the rolling maximum functionality. It iterates over the input list, updates the current maximum if the current element is greater, and appends the current maximum to the result list.\n\n2. Edge Case Handling:\n   The code handles edge cases well. It checks if the input is a list and if all elements in the list are integers, raising appropriate errors if these conditions are not met. It also correctly handles the case of an empty list, returning an empty list as the result.\n\n3. Code Quality and Efficiency:\n   The code is well-written and efficient. It uses a single pass over the input list, resulting in a time complexity of O(n). The space complexity is also O(n) due to the storage of the result list, but this is necessary to meet the problem's requirements.\n\n4. Potential Improvements:\n   There are no major improvements needed as the code is already efficient and well-written. However, one minor improvement could be to remove the check for whether all elements in the list are integers. This is because the problem statement specifies that the input will be a list of integers, so this check may not be necessary. But this depends on whether you want to make your function more robust to incorrect inputs.\n\nHere is the code with the minor improvement:\n\n```python\ndef rolling_max(input_list):\n    \"\"\"\n    Function to calculate the rolling maximums in a list of integers.\n    :param input_list: List of integers\n    :return: List of integers representing the rolling maximums\n    \"\"\"\n    # Check if input is a list\n    if not isinstance(input_list, list):\n        raise TypeError(\"Input should be a list of integers\")\n\n    # Initialize an empty list to store the rolling maximums\n    rolling_max = []\n\n    # Initialize current_max to negative infinity\n    current_max = float('-inf')\n\n    # Iterate over the input list\n    for i in input_list:\n        # If the current element is greater than current_max, update current_max\n        if i > current_max:\n            current_max = i\n\n        # Append current_max to rolling_max\n        rolling_max.append(current_max)\n\n    # Return the list of rolling maximums\n    return rolling_max\n```\n\nIn conclusion, the original solution is good and correctly implements the required functionality. The minor improvement is optional and depends on the specific requirements of your application.",
+          "execution_time": 60.9314329624176,
+          "cost": 0.20357999999999998,
+          "tokens": 2262,
+          "success": true
+        }
+      ],
+      "summary": {
+        "total_problems": 10,
+        "successful": 10,
+        "total_cost": 2.01186,
+        "total_time": 561.2649917602539,
+        "avg_cost": 0.201186,
+        "avg_time": 56.12649917602539
+      }
+    },
+    {
+      "approach": "enhanced_chromadb_memory",
+      "results": [
+        {
+          "task_id": "HumanEval/0",
+          "solution": "Here is a practical approach to solve this task:\n\n1. First, sort the list of numbers. This will make it easier to compare each number with its neighbors.\n\n2. Next, iterate over the sorted list. For each number, compare it with the next number in the list. If the difference between the two numbers is less than the threshold, return True.\n\n3. If you reach the end of the list without finding any pair of numbers that are closer than the threshold, return False.\n\n4. Remember to handle edge cases. If the list is empty or contains only one element, return False, since there are no pairs of numbers to compare.\n\n5. Finally, test your function thoroughly. Use lists of different lengths, lists with duplicate elements, lists with negative numbers, and different thresholds. This will help ensure that your function works correctly in all scenarios.\n\nHere is a Python implementation of the above approach:\n\n```python\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    if len(numbers) < 2:\n        return False\n\n    numbers.sort()\n\n    for i in range(len(numbers) - 1):\n        if abs(numbers[i] - numbers[i + 1]) < threshold:\n            return True\n\n    return False\n```\n\nAnd here are some tests:\n\n```python\nassert has_close_elements([1.0, 2.0, 3.0], 0.5) == False\nassert has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3) == True\nassert has_close_elements([], 0.5) == False\nassert has_close_elements([1.0], 0.5) == False\nassert has_close_elements([1.0, 1.0], 0.0) == True\nassert has_close_elements([-1.0, 1.0], 2.0) == True\n```\n\nThis solution incorporates the collective wisdom by handling edge cases and testing thoroughly. It also builds upon successful approaches by sorting the list and comparing each number with its neighbor.",
+          "execution_time": 24.347146034240723,
+          "cost": 0.49185,
+          "tokens": 1093,
+          "insights_used": 5,
+          "insights_details": [
+            {
+              "content": "2. Always consider edge cases: In this task, edge cases such as an empty list or a list with only on...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "2. Always consider edge cases: It's important to consider edge cases when designing a function. In t...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "3. Thorough testing is crucial: Test your function with a variety of inputs, including lists of diff...",
+              "domain": "general",
+              "quality": 0.4583333333333333,
+              "source": "local"
+            },
+            {
+              "content": "3. Thorough testing is crucial: Make sure to test your function thoroughly with a variety of inputs....",
+              "domain": "general",
+              "quality": 0.4583333333333333,
+              "source": "local"
+            },
+            {
+              "content": "3. Testing is crucial to ensure the correctness of the function. In this task, we tested the functio...",
+              "domain": "general",
+              "quality": 0.4583333333333333,
+              "source": "local"
+            }
+          ],
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/1",
+          "solution": "Here is a practical approach to solve this task:\n\n1. First, remove all spaces from the input string. This can be done using the replace() method in Python.\n\n2. Initialize an empty list to store the separate groups of parentheses and a counter to keep track of the balance of the parentheses.\n\n3. Iterate over the characters in the string. If a character is an opening parenthesis, increment the counter and append it to the current group. If a character is a closing parenthesis, decrement the counter and append it to the current group.\n\n4. If the counter reaches zero, it means that we have found a balanced group of parentheses. Add this group to the list of groups and start a new group.\n\n5. After the loop, return the list of groups.\n\n6. Test the function with various inputs, including strings with different numbers of groups, nested groups, and empty strings.\n\nHere is the Python code that implements this approach:\n\n```python\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    group = ''\n    counter = 0\n    for char in paren_string:\n        group += char\n        if char == '(':\n            counter += 1\n        else:\n            counter -= 1\n        if counter == 0:\n            groups.append(group)\n            group = ''\n    return groups\n```\n\nTest the function with various inputs:\n\n```python\nprint(separate_paren_groups('( ) (( )) (( )( ))'))  # ['()', '(())', '(()())']\nprint(separate_paren_groups('(( )) (( ))'))  # ['(())', '(())']\nprint(separate_paren_groups('(( ))'))  # ['(())']\nprint(separate_paren_groups(''))  # []\n```\n\nThis function should work correctly for all inputs, including edge cases.",
+          "execution_time": 23.70124888420105,
+          "cost": 0.46035,
+          "tokens": 1023,
+          "insights_used": 5,
+          "insights_details": [
+            {
+              "content": "2. Always consider edge cases: In this task, edge cases such as an empty list or a list with only on...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "2. Always consider edge cases: It's important to consider edge cases when designing a function. In t...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "3. Thorough testing is crucial: Test your function with a variety of inputs, including lists of diff...",
+              "domain": "general",
+              "quality": 0.4583333333333333,
+              "source": "local"
+            },
+            {
+              "content": "3. Testing is crucial to ensure the correctness of the function. In this task, we tested the functio...",
+              "domain": "general",
+              "quality": 0.4583333333333333,
+              "source": "local"
+            },
+            {
+              "content": "3. Thorough testing is crucial: Make sure to test your function thoroughly with a variety of inputs....",
+              "domain": "general",
+              "quality": 0.4583333333333333,
+              "source": "local"
+            }
+          ],
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/2",
+          "solution": "Based on the insights provided, here's how you can approach the task:\n\n1. Use appropriate data structures for the access patterns: In this task, we don't need to use any complex data structures. The input is a single floating point number and the output is also a single floating point number. \n\n2. Consider space-time tradeoffs when optimizing algorithms: This task is straightforward and doesn't require any complex algorithms. The time complexity of the solution will be O(1) as we are performing a single operation on the input number.\n\n3. Premature optimization is the root of all evil - measure first: As the task is simple, we don't need to worry about optimization at this stage. \n\n4. Use hash tables for O(1) lookup operations: This insight is not applicable to this task as we are not performing any lookup operations.\n\n5. Divide and conquer often leads to O(n log n) solutions: This insight is also not applicable to this task as we are not dealing with a problem that can be divided into subproblems.\n\nHere's the Python code for the task:\n\n```python\ndef truncate_number(number: float) -> float:\n    return number - int(number)\n```\n\nThis function works by subtracting the integer part of the number from the original number, leaving only the decimal part. \n\nYou should also write tests to ensure the function works as expected:\n\n```python\ndef test_truncate_number():\n    assert truncate_number(3.5) == 0.5\n    assert truncate_number(10.99) == 0.99\n    assert truncate_number(0.123) == 0.123\n    assert truncate_number(1.0) == 0.0\n\ntest_truncate_number()\n```\n\nThese tests cover various scenarios: a number with a decimal part less than 0.5, a number with a decimal part greater than 0.5, a number less than 1, and a number with no decimal part.",
+          "execution_time": 30.17757821083069,
+          "cost": 0.35235,
+          "tokens": 783,
+          "insights_used": 5,
+          "insights_details": [
+            {
+              "content": "Use appropriate data structures for the access patterns...",
+              "domain": "general",
+              "quality": 0.31875,
+              "source": "local"
+            },
+            {
+              "content": "Consider space-time tradeoffs when optimizing algorithms...",
+              "domain": "general",
+              "quality": 0.32,
+              "source": "local"
+            },
+            {
+              "content": "Premature optimization is the root of all evil - measure first...",
+              "domain": "general",
+              "quality": 0.24416666666666667,
+              "source": "local"
+            },
+            {
+              "content": "Use hash tables for O(1) lookup operations...",
+              "domain": "general",
+              "quality": 0.2608333333333333,
+              "source": "local"
+            },
+            {
+              "content": "Divide and conquer often leads to O(n log n) solutions...",
+              "domain": "general",
+              "quality": 0.23416666666666666,
+              "source": "local"
+            }
+          ],
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/3",
+          "solution": "Here is how I would approach this task:\n\n1. Initialize a variable `balance` to 0. This will keep track of the current balance after each operation.\n\n2. Iterate over the `operations` list. For each operation, add the operation value to `balance`.\n\n3. If at any point `balance` falls below 0, return `True`.\n\n4. If the loop completes without `balance` ever falling below 0, return `False`.\n\n5. Remember to handle edge cases. In this case, an empty list should return `False` since there are no operations to make the balance fall below zero. A list with one operation should return `True` if the operation is negative and `False` otherwise.\n\n6. Test the function with a variety of inputs, including lists of different lengths, lists with duplicate elements, and lists with negative numbers.\n\nHere is the Python code that implements this approach:\n\n```python\nfrom typing import List\n\ndef below_zero(operations: List[int]) -> bool:\n    balance = 0\n    for operation in operations:\n        balance += operation\n        if balance < 0:\n            return True\n    return False\n```\n\nAnd here are some tests:\n\n```python\nassert below_zero([1, 2, 3]) == False\nassert below_zero([1, 2, -4, 5]) == True\nassert below_zero([]) == False\nassert below_zero([-1]) == True\nassert below_zero([1, -2, 3, -4, 5]) == True\nassert below_zero([1, 2, 3, -6]) == False\n```\n\nThis function is simple and efficient, with a time complexity of O(n), where n is the length of the `operations` list. It correctly handles all edge cases and has been thoroughly tested.",
+          "execution_time": 24.918997049331665,
+          "cost": 0.45405,
+          "tokens": 1009,
+          "insights_used": 5,
+          "insights_details": [
+            {
+              "content": "2. Always consider edge cases: It's important to consider edge cases when designing a function. In t...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "2. Always consider edge cases: In this task, edge cases such as an empty list or a list with only on...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "4. When dealing with string manipulation tasks, initializing an empty string or list to store interm...",
+              "domain": "general",
+              "quality": 0.5,
+              "source": "local"
+            },
+            {
+              "content": "3. Thorough testing is crucial: Make sure to test your function thoroughly with a variety of inputs....",
+              "domain": "general",
+              "quality": 0.4583333333333333,
+              "source": "local"
+            },
+            {
+              "content": "3. Thorough testing is crucial: Test your function with a variety of inputs, including lists of diff...",
+              "domain": "general",
+              "quality": 0.4583333333333333,
+              "source": "local"
+            }
+          ],
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/4",
+          "solution": "Here is a solution that incorporates the insights from the collective memory:\n\n```python\nfrom typing import List\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_daviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n    # Handle edge cases\n    if not numbers:\n        return 0.0\n    if len(numbers) == 1:\n        return 0.0\n\n    # Calculate the mean\n    mean = sum(numbers) / len(numbers)\n\n    # Calculate the absolute deviations\n    deviations = [abs(x - mean) for x in numbers]\n\n    # Return the mean of the absolute deviations\n    return sum(deviations) / len(deviations)\n```\n\nThis solution handles the edge cases of an empty list and a list with only one element by returning 0.0, as the Mean Absolute Deviation is undefined in these cases. It then calculates the mean of the input numbers and uses a list comprehension to calculate the absolute deviations from the mean. Finally, it returns the mean of these absolute deviations.\n\nTo test this function, you could use a variety of inputs, including:\n\n- A list with multiple elements, to test the main functionality of the function\n- An empty list, to test the edge case handling\n- A list with one element, to test the edge case handling\n- A list with two identical elements, to test the function's handling of a case where the Mean Absolute Deviation should be 0.0\n- A list with negative numbers, to test the function's handling of negative inputs.",
+          "execution_time": 26.012714862823486,
+          "cost": 0.4644,
+          "tokens": 1032,
+          "insights_used": 5,
+          "insights_details": [
+            {
+              "content": "2. Always consider edge cases: In this task, edge cases such as an empty list or a list with only on...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "2. Always consider edge cases: It's important to consider edge cases when designing a function. In t...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "2. Common pitfalls or errors to avoid: It's important to remember to handle edge cases. In this task...",
+              "domain": "general",
+              "quality": 0.5,
+              "source": "local"
+            },
+            {
+              "content": "4. When dealing with string manipulation tasks, initializing an empty string or list to store interm...",
+              "domain": "general",
+              "quality": 0.5,
+              "source": "local"
+            },
+            {
+              "content": "1. Successful patterns or approaches that worked well: Iterating over the list and performing operat...",
+              "domain": "general",
+              "quality": 0.4583333333333333,
+              "source": "local"
+            }
+          ],
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/5",
+          "solution": "Based on the insights provided, here is how I would approach the task:\n\n1. Handle edge cases: The function should be able to handle an empty list or a list with only one element. For an empty list, the function should return an empty list. For a list with only one element, the function should return the list as it is, since there are no consecutive elements to insert the delimiter between.\n\n2. Use list comprehension: This is a task that involves performing an operation on each element of a list, which makes it a good candidate for using list comprehension. This approach is efficient and readable.\n\n3. Test thoroughly: After writing the function, I would test it with a variety of inputs to ensure it works correctly. This includes testing it with an empty list, a list with one element, and a list with multiple elements.\n\nHere is the code that implements these ideas:\n\n```python\nfrom typing import List\n\ndef intersperse(numbers: List[int], delimiter: int) -> List[int]:\n    if not numbers:\n        return []\n    elif len(numbers) == 1:\n        return numbers\n    else:\n        return [num for i in numbers for num in (i, delimiter)][:-1]\n\n# Testing\nprint(intersperse([], 4))  # []\nprint(intersperse([1], 4))  # [1]\nprint(intersperse([1, 2, 3], 4))  # [1, 4, 2, 4, 3]\n```\n\nThis function first checks if the input list is empty or contains only one element, and handles these edge cases appropriately. If the list contains more than one element, it uses list comprehension to insert the delimiter between each pair of consecutive elements. The `[:-1]` at the end of the list comprehension is used to remove the extra delimiter that gets added at the end.",
+          "execution_time": 22.51958966255188,
+          "cost": 0.44055,
+          "tokens": 979,
+          "insights_used": 5,
+          "insights_details": [
+            {
+              "content": "2. Always consider edge cases: In this task, edge cases such as an empty list or a list with only on...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "1. Successful patterns: Using list comprehensions for calculations involving each element of a list ...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "2. Always consider edge cases: It's important to consider edge cases when designing a function. In t...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "2. Common pitfalls: It's important to consider edge cases when designing a function. In this task, t...",
+              "domain": "general",
+              "quality": 0.5,
+              "source": "local"
+            },
+            {
+              "content": "2. Common pitfalls or errors to avoid: It's important to remember to handle edge cases. In this task...",
+              "domain": "general",
+              "quality": 0.5,
+              "source": "local"
+            }
+          ],
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/6",
+          "solution": "Here is a practical approach to solve this task:\n\n1. Split the input string by spaces to get individual groups of parentheses. This can be done using the split() method in Python.\n\n2. For each group, calculate the maximum depth of nested parentheses. This can be done by initializing a counter to 0 and a max_depth variable to 0. Then, iterate over each character in the group. If the character is '(', increment the counter. If the character is ')', decrement the counter. After each increment, update max_depth to be the maximum of max_depth and the counter.\n\n3. Return a list of maximum depths for each group.\n\n4. Test the function with various inputs, including edge cases such as an empty string, to ensure its correctness.\n\nHere is the Python code that follows the above approach:\n\n```python\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    groups = paren_string.split()\n    max_depths = []\n    for group in groups:\n        counter = 0\n        max_depth = 0\n        for char in group:\n            if char == '(':\n                counter += 1\n                max_depth = max(max_depth, counter)\n            elif char == ')':\n                counter -= 1\n        max_depths.append(max_depth)\n    return max_depths\n```\n\nAnd here are some tests:\n\n```python\nprint(parse_nested_parens('(()()) ((())) () ((())()())'))  # [2, 3, 1, 3]\nprint(parse_nested_parens(''))  # []\nprint(parse_nested_parens('()'))  # [1]\nprint(parse_nested_parens('((()))'))  # [3]\nprint(parse_nested_parens('(()()())'))  # [2]\n```\n\nThis code is concise, readable, and easy to understand. It also handles all possible scenarios that the function might encounter, as suggested by the insights.",
+          "execution_time": 27.23084020614624,
+          "cost": 0.4149,
+          "tokens": 922,
+          "insights_used": 5,
+          "insights_details": [
+            {
+              "content": "3. Testing the function with various inputs, including edge cases such as an empty string, is crucia...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "4. Design decisions: Calculating the mean and the absolute deviations in separate steps made the fun...",
+              "domain": "general",
+              "quality": 0.4166666666666667,
+              "source": "local"
+            },
+            {
+              "content": "2. Ignoring spaces or other irrelevant characters at the beginning of the task can simplify the prob...",
+              "domain": "general",
+              "quality": 0.375,
+              "source": "local"
+            },
+            {
+              "content": "4. Design decisions that had positive impact: The decision to return the result directly from the fu...",
+              "domain": "general",
+              "quality": 0.365,
+              "source": "local"
+            },
+            {
+              "content": "Use appropriate data structures for the access patterns...",
+              "domain": "general",
+              "quality": 0.31875,
+              "source": "local"
+            }
+          ],
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/7",
+          "solution": "Based on the insights, here's how you can approach the task:\n\n1. Handle Edge Cases: The function should be able to handle edge cases such as an empty list or a list with only one element. If the input list is empty, the function should return an empty list. If the list contains only one element, the function should check if the substring is present in that element and return the list accordingly.\n\n2. Use List Comprehensions: List comprehensions can be used to filter the list of strings. This approach is efficient and makes the code more readable.\n\n3. Test the Function: After writing the function, test it with different inputs to ensure it works correctly. Include tests for the edge cases mentioned above.\n\nHere's the updated function:\n\n```python\nfrom typing import List\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    >>> filter_by_substring([], 'a')\n    []\n    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')\n    ['abc', 'bacd', 'array']\n    \"\"\"\n    # Handle edge cases\n    if not strings:\n        return []\n    \n    # Use list comprehension to filter the list\n    return [s for s in strings if substring in s]\n```\n\nAnd here are some tests:\n\n```python\nassert filter_by_substring([], 'a') == []\nassert filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a') == ['abc', 'bacd', 'array']\nassert filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'z') == []\nassert filter_by_substring(['abc'], 'a') == ['abc']\nassert filter_by_substring(['abc'], 'z') == []\n```\n\nThese tests cover the edge cases and ensure that the function works correctly.",
+          "execution_time": 29.641334056854248,
+          "cost": 0.45135,
+          "tokens": 1003,
+          "insights_used": 5,
+          "insights_details": [
+            {
+              "content": "2. Always consider edge cases: In this task, edge cases such as an empty list or a list with only on...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "1. Successful patterns: Using list comprehensions for calculations involving each element of a list ...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "2. Common pitfalls or errors to avoid: It's important to handle edge cases such as an empty string i...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "2. Always consider edge cases: It's important to consider edge cases when designing a function. In t...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "2. Common pitfalls: It's important to consider edge cases when designing a function. In this task, t...",
+              "domain": "general",
+              "quality": 0.5,
+              "source": "local"
+            }
+          ],
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/8",
+          "solution": "Here is a solution that incorporates the insights from the collective memory:\n\n```python\nfrom typing import List, Tuple\nfrom functools import reduce\nimport operator\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" \n    For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    \"\"\"\n    # Handle edge case of empty list\n    if not numbers:\n        return (0, 1)\n    \n    # Calculate sum and product using list comprehension and reduce\n    sum_numbers = sum(numbers)\n    product_numbers = reduce(operator.mul, numbers, 1)\n    \n    return (sum_numbers, product_numbers)\n```\n\nThis solution uses list comprehension to calculate the sum of the numbers in the list. It uses the `reduce` function from the `functools` module along with the `mul` function from the `operator` module to calculate the product of the numbers in the list. The `reduce` function applies a binary function (in this case, multiplication) to all items of a sequence (the list of numbers) in a cumulative way. The third argument to `reduce` is the initializer, which is set to 1 so that the product of an empty list is 1.\n\nThe edge case of an empty list is handled at the beginning of the function. If the list is empty, the function immediately returns a tuple of (0, 1), which is the sum and product of an empty list, respectively.\n\nThis solution is efficient and readable, and it handles all edge cases correctly. It can be tested with a variety of inputs, including empty lists, lists with one element, and lists with multiple elements.",
+          "execution_time": 24.17190909385681,
+          "cost": 0.44325,
+          "tokens": 985,
+          "insights_used": 5,
+          "insights_details": [
+            {
+              "content": "1. Successful patterns: Using list comprehensions for calculations involving each element of a list ...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "2. Common pitfalls or errors to avoid: It's important to handle edge cases such as an empty string i...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "2. Always Consider Edge Cases: When designing a function, always consider potential edge cases and e...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "2. Always consider edge cases: In this task, edge cases such as an empty list or a list with only on...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "2. Always consider edge cases: It's important to consider edge cases when designing a function. In t...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            }
+          ],
+          "success": true
+        },
+        {
+          "task_id": "HumanEval/9",
+          "solution": "Based on the insights, here is the solution:\n\n```python\nfrom typing import List\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n    # Handle edge cases\n    if not numbers:\n        return []\n    if len(numbers) == 1:\n        return numbers\n\n    # Use list comprehension to generate the rolling max list\n    return [max(numbers[:i+1]) for i in range(len(numbers))]\n```\n\nThis solution uses list comprehension to generate the rolling max list, which is an efficient and readable approach. It also handles edge cases such as an empty list or a list with only one element, ensuring the function works correctly in all scenarios.\n\nTo test the function, we can use the following test cases:\n\n```python\nassert rolling_max([1, 2, 3, 2, 3, 4, 2]) == [1, 2, 3, 3, 3, 4, 4]\nassert rolling_max([5, 4, 3, 2, 1]) == [5, 5, 5, 5, 5]\nassert rolling_max([1]) == [1]\nassert rolling_max([]) == []\n```\n\nThese test cases cover a variety of scenarios, including a list with increasing and decreasing numbers, a list with only one element, and an empty list.",
+          "execution_time": 25.555830240249634,
+          "cost": 0.4473,
+          "tokens": 994,
+          "insights_used": 5,
+          "insights_details": [
+            {
+              "content": "4. Using the `functools` and `operator` modules can be very helpful for tasks that involve applying ...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "2. Always Consider Edge Cases: When designing a function, always consider potential edge cases and e...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "1. Successful patterns: Using list comprehensions for calculations involving each element of a list ...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            },
+            {
+              "content": "2. Always consider edge cases: In this task, edge cases such as an empty list or a list with only on...",
+              "domain": "general",
+              "quality": 0.5833333333333334,
+              "source": "local"
+            },
+            {
+              "content": "2. Always consider edge cases: It's important to consider edge cases when designing a function. In t...",
+              "domain": "general",
+              "quality": 0.5416666666666666,
+              "source": "local"
+            }
+          ],
+          "success": true
+        }
+      ],
+      "summary": {
+        "total_problems": 10,
+        "successful": 10,
+        "total_cost": 4.42035,
+        "total_time": 258.2771883010864,
+        "avg_cost": 0.442035,
+        "avg_time": 25.827718830108644,
+        "total_insights_used": 50,
+        "avg_insights_per_problem": 5.0
+      }
+    }
+  ],
+  "analysis": {
+    "timestamp": "2025-07-08T07:41:19.905577",
+    "comparison": {
+      "single_agent": {
+        "success_rate": 1.0,
+        "avg_cost": 0.025406999999999996,
+        "avg_time": 13.96165065765381,
+        "total_cost": 0.25406999999999996,
+        "total_time": 139.6165065765381
+      },
+      "multi_agent_no_memory": {
+        "success_rate": 1.0,
+        "avg_cost": 0.201186,
+        "avg_time": 56.12649917602539,
+        "total_cost": 2.01186,
+        "total_time": 561.2649917602539
+      },
+      "enhanced_chromadb_memory": {
+        "success_rate": 1.0,
+        "avg_cost": 0.442035,
+        "avg_time": 25.827718830108644,
+        "total_cost": 4.42035,
+        "total_time": 258.2771883010864,
+        "avg_insights_used": 5.0,
+        "total_insights_used": 50
+      }
+    },
+    "insights": [
+      "Enhanced system uses 5.0 insights per problem on average",
+      "Cost vs Single Agent: +1639.8%",
+      "Cost vs Multi-Agent: +119.7%",
+      "Time vs Single Agent: +85.0%",
+      "Time vs Multi-Agent: -54.0%",
+      "Success rates: Single=100.0%, Multi=100.0%, Enhanced=100.0%"
+    ]
+  }
+}
