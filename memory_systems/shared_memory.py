@@ -22,16 +22,20 @@ class SharedMemorySystem(BaseMemorySystem):
         self.storage_path = storage_path
         self.json_file = os.path.join(storage_path, f"shared_memory_{system_id}.json")
         
-        # Initialize ChromaDB for semantic search
+        # Initialize ChromaDB for semantic search (embedded mode)
         try:
-            self.chroma_client = chromadb.HttpClient(
-                host=chroma_host, 
-                port=chroma_port,
-                settings=Settings(allow_reset=True)
+            # Use embedded ChromaDB (no server required)
+            # Sanitize system_id for ChromaDB collection name
+            safe_system_id = system_id.replace('/', '_').replace('\\', '_').replace(' ', '_')
+            safe_system_id = ''.join(c for c in safe_system_id if c.isalnum() or c in '._-')
+            
+            self.chroma_client = chromadb.PersistentClient(
+                path=f"./memory_data/chromadb_{safe_system_id}"
             )
             self.collection = self.chroma_client.get_or_create_collection(
-                name=f"shared_memory_{system_id}"
+                name=f"shared_memory_{safe_system_id}"
             )
+            print(f"✅ ChromaDB initialized successfully (embedded mode)")
         except Exception as e:
             print(f"Warning: ChromaDB not available, using basic search: {e}")
             self.chroma_client = None

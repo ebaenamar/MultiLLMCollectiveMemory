@@ -1,0 +1,36 @@
+{
+  "keywords": [
+    "optimize",
+    "performance",
+    "efficiency",
+    "complexity",
+    "bottleneck",
+    "cache",
+    "memory",
+    "time",
+    "space",
+    "algorithm",
+    "profiling",
+    "benchmark"
+  ],
+  "patterns": [
+    "time complexity analysis",
+    "space complexity analysis",
+    "caching strategies",
+    "lazy evaluation",
+    "memoization",
+    "parallel processing",
+    "vectorization",
+    "database optimization"
+  ],
+  "insights": [
+    "Profile before optimizing to identify actual bottlenecks",
+    "Cache frequently accessed data to reduce computation time",
+    "Use appropriate data structures for the access patterns",
+    "Consider space-time tradeoffs when optimizing algorithms",
+    "Lazy evaluation can improve performance for unused computations",
+    "Parallel processing can speed up independent operations",
+    "Database indexing dramatically improves query performance",
+    "Premature optimization is the root of all evil - measure first"
+  ]
+}

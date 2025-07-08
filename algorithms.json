@@ -1,0 +1,21 @@
+{
+  "keywords": [
+    "sort",
+    "search",
+    "dynamic",
+    "greedy",
+    "divide",
+    "conquer"
+  ],
+  "patterns": [
+    "recursion",
+    "iteration",
+    "memoization",
+    "optimization"
+  ],
+  "insights": [
+    "Dynamic programming reduces time complexity by avoiding recomputation",
+    "Divide and conquer often leads to O(n log n) solutions",
+    "Greedy algorithms work when local optima lead to global optima"
+  ]
+}

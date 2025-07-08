@@ -1,0 +1,24 @@
+{
+  "keywords": [
+    "array",
+    "list",
+    "tree",
+    "graph",
+    "hash",
+    "stack",
+    "queue",
+    "heap"
+  ],
+  "patterns": [
+    "binary search",
+    "traversal",
+    "insertion",
+    "deletion",
+    "lookup"
+  ],
+  "insights": [
+    "Use hash tables for O(1) lookup operations",
+    "Binary search trees provide O(log n) search in balanced cases",
+    "Arrays offer constant-time access but expensive insertions"
+  ]
+}

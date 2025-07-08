@@ -1,0 +1,20 @@
+{
+  "keywords": [
+    "test",
+    "assert",
+    "validate",
+    "check",
+    "verify",
+    "edge case"
+  ],
+  "patterns": [
+    "boundary testing",
+    "null checks",
+    "type validation"
+  ],
+  "insights": [
+    "Always test edge cases like empty inputs and boundary values",
+    "Type validation prevents runtime errors in dynamic languages",
+    "Unit tests should cover both happy path and error conditions"
+  ]
+}

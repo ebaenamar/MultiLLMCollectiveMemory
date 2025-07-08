@@ -1,0 +1,36 @@
+{
+  "keywords": [
+    "test",
+    "assert",
+    "validate",
+    "check",
+    "verify",
+    "edge case",
+    "unit test",
+    "integration test",
+    "mock",
+    "stub",
+    "fixture",
+    "coverage"
+  ],
+  "patterns": [
+    "boundary testing",
+    "null checks",
+    "type validation",
+    "error handling",
+    "test-driven development",
+    "behavior-driven development",
+    "regression testing",
+    "performance testing"
+  ],
+  "insights": [
+    "Always test edge cases like empty inputs and boundary values",
+    "Type validation prevents runtime errors in dynamic languages",
+    "Unit tests should cover both happy path and error conditions",
+    "Mock external dependencies to isolate units under test",
+    "Test coverage should focus on critical business logic",
+    "Integration tests validate component interactions",
+    "Regression tests prevent previously fixed bugs from reoccurring",
+    "Performance tests ensure scalability requirements are met"
+  ]
+}

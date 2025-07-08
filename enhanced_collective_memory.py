@@ -40,7 +40,7 @@ class EnhancedMemoryEntry(MemoryEntry):
 class IntelligentInsightFilter:
     """Filters insights based on quality, relevance, and success metrics"""
     
-    def __init__(self, min_quality_score: float = 0.6, max_insights: int = 5):
+    def __init__(self, min_quality_score: float = 0.2, max_insights: int = 5):
         self.min_quality_score = min_quality_score
         self.max_insights = max_insights
         
@@ -79,11 +79,12 @@ class IntelligentInsightFilter:
         filtered = [i for i in insights if i.quality_score >= self.min_quality_score]
         
         # Sort by combined score (quality + relevance + usage success)
+        # Handle both MemoryEntry and EnhancedMemoryEntry objects
         filtered.sort(key=lambda x: (
             x.quality_score * 0.4 + 
             x.context_similarity * 0.3 + 
-            x.success_rate * 0.2 + 
-            min(1.0, x.usage_count / 10) * 0.1
+            getattr(x, 'success_rate', 1.0) * 0.2 + 
+            min(1.0, getattr(x, 'usage_count', 0) / 10) * 0.1
         ), reverse=True)
         
         return filtered[:self.max_insights]
@@ -137,7 +138,11 @@ class DomainSpecificMemory:
         """Get or create memory system for specific domain"""
         if domain not in self.domain_memories:
             domain_path = self.base_path / domain
-            self.domain_memories[domain] = SharedMemorySystem(str(domain_path))
+            # Use clean domain name for system_id, but specify storage path
+            self.domain_memories[domain] = SharedMemorySystem(
+                system_id=f"domain_{domain}",
+                storage_path=str(domain_path)
+            )
         return self.domain_memories[domain]
     
     def store_domain_insight(self, insight: EnhancedMemoryEntry) -> bool:
@@ -153,15 +158,22 @@ class DomainSpecificMemory:
         query_domain = self.classify_domain(query)
         all_insights = []
         
-        # Primary domain
-        if query_domain in self.domain_memories:
-            primary_insights = self.domain_memories[query_domain].retrieve(query, agent_id, limit)
+        # Primary domain - always try to get/create the domain memory
+        try:
+            primary_memory = self.get_domain_memory(query_domain)
+            primary_insights = primary_memory.retrieve(query, agent_id, limit)
             all_insights.extend(primary_insights)
+        except Exception as e:
+            print(f"Error retrieving from {query_domain} domain: {e}")
         
         # General domain as fallback
-        if query_domain != 'general' and 'general' in self.domain_memories:
-            general_insights = self.domain_memories['general'].retrieve(query, agent_id, limit // 2)
-            all_insights.extend(general_insights)
+        if query_domain != 'general':
+            try:
+                general_memory = self.get_domain_memory('general')
+                general_insights = general_memory.retrieve(query, agent_id, limit // 2)
+                all_insights.extend(general_insights)
+            except Exception as e:
+                print(f"Error retrieving from general domain: {e}")
         
         return all_insights[:limit]
 
@@ -303,12 +315,19 @@ Format each insight as a clear, actionable statement that another developer coul
         
         formatted = []
         for i, insight in enumerate(insights, 1):
-            source_info = f"[{insight.domain.upper()}]"
-            if insight.federation_source:
-                source_info += f" (from {insight.federation_source})"
+            # Handle both MemoryEntry and EnhancedMemoryEntry objects
+            domain = getattr(insight, 'domain', 'GENERAL')
+            source_info = f"[{domain.upper()}]"
+            
+            federation_source = getattr(insight, 'federation_source', None)
+            if federation_source:
+                source_info += f" (from {federation_source})"
+            
+            quality_score = getattr(insight, 'quality_score', 0.0)
+            success_rate = getattr(insight, 'success_rate', 1.0)
             
             formatted.append(f"""
-{i}. {source_info} Quality: {insight.quality_score:.2f}, Success Rate: {insight.success_rate:.2f}
+{i}. {source_info} Quality: {quality_score:.2f}, Success Rate: {success_rate:.2f}
    {insight.content}
 """)
         
@@ -399,9 +418,9 @@ class EnhancedCollectiveMemoryAgent:
             "insights_details": [
                 {
                     "content": insight.content[:100] + "...",
-                    "domain": insight.domain,
-                    "quality": insight.quality_score,
-                    "source": insight.federation_source or "local"
+                    "domain": getattr(insight, 'domain', 'general'),
+                    "quality": getattr(insight, 'quality_score', 0.0),
+                    "source": getattr(insight, 'federation_source', None) or "local"
                 }
                 for insight in filtered_insights
             ],
@@ -460,9 +479,12 @@ class EnhancedCollectiveMemoryAgent:
         
         # Update success rates for used insights
         for insight in used_insights:
-            insight.usage_count += 1
-            # Simple success rate update (could be enhanced with actual outcome evaluation)
-            insight.success_rate = (insight.success_rate * (insight.usage_count - 1) + 1.0) / insight.usage_count
+            # Handle both MemoryEntry and EnhancedMemoryEntry objects
+            if hasattr(insight, 'usage_count'):
+                insight.usage_count += 1
+                # Simple success rate update (could be enhanced with actual outcome evaluation)
+                if hasattr(insight, 'success_rate'):
+                    insight.success_rate = (insight.success_rate * (insight.usage_count - 1) + 1.0) / insight.usage_count
 
 def run_enhanced_experiment():
     """Run experiment with enhanced collective memory system"""
