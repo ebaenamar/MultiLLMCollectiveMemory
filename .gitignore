@@ -2,6 +2,8 @@
 .env
 *.env
 .env.local
+.env__
+test_api_key.py
 
 # Python
 __pycache__/
